@@ -1,0 +1,10 @@
+---
+# file: roles/kubernetes/tasks/main.yml
+
+- import_tasks: master.yml
+  become: yes
+  tags: master
+
+- import_tasks: node.yml
+  become: yes
+  tags: node

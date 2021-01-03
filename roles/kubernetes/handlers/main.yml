@@ -1,0 +1,10 @@
+---
+# file: roles/kubernetes/handlers/main.yml
+
+- name: restart nftables service
+  service:
+    name: nftables
+    state: reloaded
+
+- name: restart sshd
+  service: name=sshd state=restarted
