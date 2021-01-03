@@ -1,0 +1,6 @@
+#!/usr/sbin/nft -f
+
+flush ruleset
+
+# Include all the files ending with .nft in '/etc/nftables.d/'
+include "/etc/nftables.d/*.nft"

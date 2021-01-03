@@ -1,0 +1,25 @@
+---
+# file: roles/common/tasks/main.yml
+
+- name: Set the hostname
+  hostname:
+    name: "{{ hostname }}"
+  when: hostname is defined
+
+- name: Make the Swap inactive
+  become: yes
+  command: swapoff -a
+
+- name: Remove Swap entry from /etc/fstab.
+  become: yes
+  lineinfile:
+    dest: /etc/fstab
+    regexp: swap
+    state: absent
+
+- import_tasks: ssh.yml
+  become: yes
+- import_tasks: packages.yml
+  become: yes
+- import_tasks: kubernetes.yml
+  become: yes

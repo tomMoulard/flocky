@@ -1,0 +1,44 @@
+---
+# file: roles/common/tasks/main.yml
+
+# Base Packages list
+base_packages:
+  - apt-transport-https
+  - bash
+  - ca-certificates
+  - curl
+  - gnupg-agent
+  - ioping
+  - nload
+  - openssh-server
+  - openssl
+  - python-apt
+  - python3
+  - software-properties-common
+  - speedtest-cli
+  - sudo
+  - tar
+  - tree
+  - unzip
+  - vim
+  - wget
+  - zip
+
+# Top Packages list
+top_packages:
+  - atop
+  - htop
+  - iftop
+  - iotop
+
+# Root user parameters
+root_user:
+  password: ''
+  ssh_authorized_keys:
+     - "{{ ssh_key_root }}"
+  ssh_revoked_keys: []
+
+root_password_min_length: 16
+
+ssh_authorized_keys: []
+ssh_authorized_keys_extra: []

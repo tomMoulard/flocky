@@ -1,0 +1,11 @@
+---
+# file: server.yml
+
+- hosts: servers
+  remote_user: pi
+  vars_files:
+    - vars/ssh_keys.yml
+    - vars/config.yml
+  roles:
+    - {role: init}
+    - {role: common, tags: ['common']}

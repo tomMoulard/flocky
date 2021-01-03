@@ -1,0 +1,5 @@
+User_Alias     ADMINS = {{ sudo_users|join(', ') }}
+
+Cmnd_Alias     OPS_CMD = {{ sudo_commands|join(', ') }}
+
+ADMINS         ALL = (ALL) OPS_CMD

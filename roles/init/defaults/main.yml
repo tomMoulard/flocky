@@ -1,0 +1,10 @@
+---
+# file: roles/init/defaults/main.yml
+
+# Timeout while trying a SSH port
+ssh_init_timeout: 4
+
+# Connect timeout while trying a SSH port
+ssh_init_connect_timeout: 2
+
+ansible_port: 22

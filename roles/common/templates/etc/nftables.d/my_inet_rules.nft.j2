@@ -1,0 +1,61 @@
+{{ansible_managed|comment}}
+
+# flush ruleset
+
+table inet filter {
+    set tcp_accepted {
+        type inet_service; flags interval;
+        elements = {
+{% for port in tcp_ports %}
+           {{ port }},
+{% endfor %}
+{% for ssh_port in ssh_server_ports %}
+           {{ ssh_port }},
+{% endfor %}
+       }
+   }
+   set udp_accepted {
+       type inet_service; flags interval;
+       elements = {
+{% for port in udp_ports %}
+           {{ port }},
+{% endfor %}
+        }
+    }
+
+    chain base_checks {
+        # allow established/related connections
+        ct state {established, related} accept
+
+        # early drop of invalid connections
+        ct state invalid drop
+
+        # allow from loopback
+        iifname lo accept
+    }
+
+    chain input {
+        type filter hook input priority 0; policy drop;
+
+        jump base_checks
+
+        # allow icmp
+        ip protocol icmp icmp type { echo-request, echo-reply, time-exceeded, parameter-problem, destination-unreachable } limit rate 5/second accept
+        ip6 nexthdr icmpv6 icmpv6 type { echo-request, echo-reply, time-exceeded, parameter-problem, destination-unreachable, packet-too-big, nd-router-advert, nd-router-solicit, nd-neighbor-solicit, nd-neighbor-advert, mld-listener-query } limit rate 5/second accept
+
+        # allow ports
+        tcp dport @tcp_accepted accept
+        udp dport @udp_accepted accept
+
+        # everything else
+        counter reject with icmpx type port-unreachable
+    }
+
+    chain forward {
+        type filter hook forward priority 0; policy drop;
+    }
+
+    chain output {
+	type filter hook output priority 0; policy accept;
+    }
+}

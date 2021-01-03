@@ -1,0 +1,8 @@
+# Users
+root_user:
+  password: ""
+
+root_password_min_length: 5
+
+ssh_authorized_keys:
+  - "{{ ssh_key_root }}"
