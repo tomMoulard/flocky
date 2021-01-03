@@ -3,8 +3,8 @@
 
 - import_tasks: master.yml
   become: yes
-  tags: master
+  tags: ['master']
 
-- import_tasks: node.yml
+- import_tasks: worker.yml
   become: yes
-  tags: node
+  tags: ['worker']

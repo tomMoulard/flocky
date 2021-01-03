@@ -1,7 +1,7 @@
 ---
-# roles/kubernetes/tasks/node.yml
+# roles/kubernetes/tasks/worker.yml
 
-- name: ping nodes
+- name: Ping workers
   ping:
 
 

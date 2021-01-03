@@ -9,5 +9,5 @@ An ansible script to manage my home flock of Raspberry pies.
 
 # Road map
  - [X] Basic configuration
- - [ ] K8s cluster with 1 master and X nodes
+ - [ ] K8s cluster with 1 master and X workers
  - [X] Have Fun
