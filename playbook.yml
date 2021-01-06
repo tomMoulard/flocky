@@ -16,7 +16,7 @@
     - vars/ssh_keys.yml
     - vars/config.yml
   roles:
-    - {role: kubernetes, tags: ['master']}
+    - {role: kubernetes-master}
 
 - hosts: kubernetes_workers
   remote_user: root
@@ -24,4 +24,4 @@
     - vars/ssh_keys.yml
     - vars/config.yml
   roles:
-    - {role: kubernetes, tags: ['workers']}
+    - {role: kubernetes-worker}

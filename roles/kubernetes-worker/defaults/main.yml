@@ -1,0 +1,5 @@
+---
+# file: roles/kubernetes/defaults/main.yml
+
+k8s_master_ip: "{{ kubernetes_master }}"
+pod_network_cidr: "192.198.0.96/24"
